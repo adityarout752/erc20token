@@ -15,7 +15,7 @@ mapping(address => uint256) balances;
  mapping(address => mapping(address => uint)) public allowed;
 
 constructor() {
-  totalSupply = 1000;
+  totalSupply = 10000;
   founder = msg.sender;
   balances[founder] = totalSupply;
 
@@ -25,7 +25,7 @@ function balanceOf(address  tokenOwner) public view override returns(uint256 bal
   return balances[tokenOwner];
 }
 
-function tranfer(address _to,uint tokens) public view override returns(bool success) {
+function transfer(address _to,uint tokens) public  override virtual returns(bool success) {
 
 require(balances[msg.sender] >= tokens ,"not enough balance");
   balances[_to]+= tokens;
@@ -43,7 +43,7 @@ function approve(address spender,uint tokens) public override returns(bool succe
    return true;
 }
 
-function allowance(address owner, address spender) public override returns (uint noOfTokens) {
+function allowance(address owner, address spender) public view override returns (uint noOfTokens) {
 
 return allowed[owner][spender];
 }
